@@ -1,0 +1,118 @@
+/* General Styles */
+body {
+  background-color: #000400;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(18, 1, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.countdown {
+  display: flex;
+  flex-direction: row; /* Ensure items are in a horizontal line */
+  gap: 1.5rem; /* Space between boxes */
+  justify-content: center; /* Center content */
+  flex-wrap: wrap; /* Allow wrapping if necessary */
+}
+
+/* Responsive time-box styling */
+.time-box {
+  width: 150px; /* Fixed width for uniformity */
+  height: 100px; /* Fixed height for uniformity */
+  padding: 1.2em; /* Padding for inner content */
+  background: #f86300;
+  text-align: center;
+  border-radius: 10px;
+  position: relative;
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Responsive animated borders */
+.time-box::after, .time-box::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(from var(--angle), transparent 70%, rgb(132, 222, 154));
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 3px;
+  border-radius: 10px;
+  animation: 3s spin linear infinite;
+}
+
+.time-box::before {
+  filter: blur(1.5rem);
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Time Value Styling */
+.time-value {
+  font-size: 2rem; /* Adjusted font size for uniformity */
+  font-weight: bold;
+  color: rgb(255, 249, 249);
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Label for Time Units */
+.time-label {
+  font-size: 0.9rem; /* Adjusted for smaller font scaling */
+  text-transform: uppercase;
+  color: #d5d5d5;
+  letter-spacing: 0.1rem;
+  margin-top: 0.5rem;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  .time-value {
+    font-size: 1.8rem; /* Further reduce font size */
+  }
+
+  .countdown {
+    gap: 1rem; /* Reduced gap for better fit */
+  }
+}
+
+@media (max-width: 480px) {
+  .time-value {
+    font-size: 1.5rem; /* Smaller font size on very small screens */
+  }
+
+  .countdown {
+    gap: 0.5rem; /* Reduced gap for very small screens */
+  }
+
+  .time-label {
+    font-size: 0.8rem; /* Adjust font size for very small screens */
+  }
+}
